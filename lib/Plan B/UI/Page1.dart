@@ -5,14 +5,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
 import 'package:to_do/Plan%20B/Data/model.dart';
+import 'package:to_do/Plan%20B/Provider/HabitProvider.dart';
 import 'package:to_do/Plan%20B/UI/HomeHabit.dart';
 import 'package:to_do/Plan%20B/UI/Pagetask.dart';
+import 'package:to_do/Plan%20B/UI/Tasks.dart';
+
 
 import 'package:to_do/Plan%20B/UI/upcoming.dart';
 import 'package:provider/provider.dart';
 import '../Provider/db_provider.dart';
-import 'Addhabit1.dart';
+import 'Createhabit.dart';
+
 import 'Newtask.dart';
+import 'pAGE2.dart';
 
 
 
@@ -27,7 +32,7 @@ class _Page1State extends State<Page1> with SingleTickerProviderStateMixin{
 
   
     // TODO: implement build
- return  Consumer<DbProvider>(builder: (context,provider,c){
+ 
   return  Scaffold(
       
         // appBar: AppBar(
@@ -89,39 +94,49 @@ class _Page1State extends State<Page1> with SingleTickerProviderStateMixin{
                   ),
                   SizedBox(height: 20.h,),
                   SingleChildScrollView(
-                    physics: ScrollPhysics(),
+                            physics: ScrollPhysics(),
+
                     child: Column(children: [
                      Row(children: [
                       Text("Habits",style: GoogleFonts.radley(fontSize: 20),),
    
                      ],) ,SizedBox(height: 10,),
-                      // HomeHabit(concolor: const Color.fromARGB(255, 154, 228, 157), image: "assets/images/trees-removebg-preview.png", title: "Get outside", Precentcolor:Color.fromARGB(255, 180, 140, 164), Percent: '50%',),
-                        HomeHabit(concolor: Color.fromRGBO(104, 67, 184, 80), image: "assets/images/drink-removebg-preview.png", title: "Drink 10 cups of water",Precentcolor:Color.fromARGB(255, 212, 210, 112), Percent: '90%',fill: .9,),
-                       HomeHabit(concolor: Color.fromARGB(175, 219, 166, 113), image: "assets/images/bookpgpn-removebg-preview.png", title: "Read 10 pages from book",Precentcolor:Color.fromARGB(255, 146, 59, 136), Percent: '60%',fill:.6),
-                       
+                    ListView.builder(
+                      shrinkWrap: true,
+                       physics: NeverScrollableScrollPhysics(),
+            itemCount: Provider.of<HabitProvider>(context).selectedHabit.length,
+            itemBuilder: (context, index) {
+              return HomeHabit(Provider.of<HabitProvider>(context).selectedHabit[index]);
+            }),
+                   
+     
    
                     ]),
                   ),
                  
                   SingleChildScrollView(
-                //    physics: ScrollPhysics(),
+                  physics: ScrollPhysics(),
                     child: Column(children: [
                         Row(children: [
-                        Text("Tasks",style: GoogleFonts.radley(fontSize: 20),),
-                     //   PageTask(TaskModel(title:"Hello world" ,description: "WElcome")),
+                        
+                        SizedBox(height: 10,),
+                        
+               
+     
+        //  ListView.builder(
+        //    shrinkWrap: true,
+        //                physics: NeverScrollableScrollPhysics(),
+        //     itemCount: Provider.of<DbProvider>(context).allTasks.length,
+        //     itemBuilder: (context, index) {
+        //       return PageTask(Provider.of<DbProvider>(context).allTasks[index]);
+        //     }),
+     
+    
                      
                        ],) ,//SizedBox(height: 10,),
                     
                                  
                        
-                         ListView.builder(
-                        
-                          scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: provider.allTasks.length,
-                              itemBuilder: (context, index) {
-                                return PageTask(provider.allTasks[index]);
-                              }),
                         
                      
                         
@@ -175,7 +190,8 @@ class _Page1State extends State<Page1> with SingleTickerProviderStateMixin{
             ),
           
             IconButton(icon: Icon(Icons.calendar_month_rounded,size: 35,color: Colors.grey[500],),onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: ((context) => upcoming())));
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => upcoming())));
+                 
           
             },
             
@@ -183,7 +199,7 @@ class _Page1State extends State<Page1> with SingleTickerProviderStateMixin{
              IconButton(icon: Icon(Icons.radar_outlined,size: 35,color: Colors.grey[500],
            ),
            onPressed: (){
-         //   Navigator.push(context, MaterialPageRoute(builder: ((context) => AddTask())));
+           Navigator.push(context, MaterialPageRoute(builder: ((context) => Tasks())));
            },
             
                      //  backgroundColor: Colors.blue,
@@ -205,7 +221,7 @@ class _Page1State extends State<Page1> with SingleTickerProviderStateMixin{
         
       );
 
- });
+ 
    
    
   

@@ -3,13 +3,13 @@ import 'package:to_do/Plan%20B/Data/DbHelper.dart';
 
 class TaskModel {
   int? id;
-  String? title;
-  String?description;
+  String title="Hello";
+  String description="";
   late bool isComplete;
   TaskModel({
-    required this.title,
+  required   this.title,
     this.isComplete = false,
-    this.description
+   required this.description
   });
   TaskModel.fromMap(Map<String, dynamic> map) {
     id = map[DbHelper.taskIdColumName];
@@ -20,6 +20,7 @@ class TaskModel {
   Map<String, dynamic> toMap() {
     return {
       DbHelper.taskNameColumName: title,
+      DbHelper.taskdescColumName:description,
       
       DbHelper.taskIsCompleteColumName: (isComplete) ? 1 : 0
     };

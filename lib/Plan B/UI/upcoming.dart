@@ -6,8 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/Plan%20B/UI/HomeHabit.dart';
 
 import 'package:to_do/Plan%20B/UI/Page1.dart';
+
+import '../Provider/HabitProvider.dart';
+import '../Provider/db_provider.dart';
+import 'Pagetask.dart';
 
 
 class upcoming extends StatefulWidget{
@@ -115,8 +121,23 @@ class _upcomingState extends State<upcoming> with TickerProviderStateMixin{
             children: [
              
 
-           Text('data'),
-           Text('data2')
+           
+    ListView.builder(
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+            itemCount: Provider.of<HabitProvider>(context).selectedHabit.length,
+            itemBuilder: (context, index) {
+              return HomeHabit (Provider.of<HabitProvider>(context).selectedHabit[index]);
+            }),
+            Consumer<DbProvider>(
+      builder: (context,provider,x) {
+        return ListView.builder(
+            itemCount: provider.allTasks.length,
+            itemBuilder: (context, index) {
+              return PageTask(provider.allTasks[index]);
+            });
+      }
+    ),
           ],))
 
         ],

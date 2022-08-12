@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:to_do/Plan%20B/Data/Habitmodel.dart';
 
 
 import 'model.dart';
@@ -17,6 +18,14 @@ class DbHelper {
   static const String taskNameColumName = 'taskName';
   static const String taskIsCompleteColumName = 'taskComplete';
   static const String  taskdescColumName = 'taskdescName';
+
+  static const String habitablename='habit';
+  static const String habitIdcolumnname='habitid';
+  static const String habitIsCompleteColumName = 'habitcomlete';
+  static const String habittext='text';
+  static const String habitimage='image';
+  static const String habitcolor="color";
+
  
   Database? database;
   initDatabase() async {
@@ -28,7 +37,7 @@ class DbHelper {
     String databaseName = 'tasks.db';
     String fullPath = join(databasePath, databaseName);
     Database database =
-        await openDatabase(fullPath, version: 2, onCreate: (db, i) {
+        await openDatabase(fullPath, version: 5, onCreate: (db, i) {
       log('hello, the database has been created');
 
       db.execute('''
@@ -37,6 +46,14 @@ class DbHelper {
    $taskNameColumName TEXT,
     $taskdescColumName TEXT,
     $taskIsCompleteColumName INTEGER)
+''');
+db.execute('''
+ CREATE TABLE $habitablename (
+  $habitIdcolumnname INTEGER PRIMARY KEY AUTOINCREMENT,
+  $habittext TEXT,
+   $habitimage TEXT,
+   $habitcolor Text,
+    $habitIsCompleteColumName INTEGER)
 ''');
     }, onOpen: (db) async {
       final tables =
@@ -50,12 +67,23 @@ class DbHelper {
     int rowIndex = await database!.insert(tableName, taskModel.toMap());
     log(rowIndex.toString());
   }
+ insertNewhabit(HabitModel habitModel) async {
+    int rowIndex = await database!.insert(habitablename, habitModel.toMap());
+    log(rowIndex.toString());
+  }
 
   Future<List<TaskModel>> selectAllTasks() async {
     List<Map<String, Object?>> rowsAsMaps = await database!.query(tableName);
     List<TaskModel> tasks =
         rowsAsMaps.map((e) => TaskModel.fromMap(e)).toList();
     return tasks;
+  }
+  
+  Future<List<HabitModel>> selectAllThabit() async {
+    List<Map<String, Object?>> rowsAsMaps = await database!.query(habitablename);
+    List<HabitModel> habit =
+        rowsAsMaps.map((e) => HabitModel.fromMap(e)).toList();
+    return habit;
   }
 
   selectOneTask(int id) {

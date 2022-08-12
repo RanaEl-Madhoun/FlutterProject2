@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'habit.dart';
+import 'habitWidget.dart';
 
 class Addhabit extends StatelessWidget{
   @override
@@ -42,11 +42,14 @@ return Scaffold(
         ]    
           ),SizedBox(height: 10,),
 
+    
+   
           Row(
             children: [
-              habit(colors: (const Color.fromRGBO(216, 245, 223, 100)), image: 'assets/images/nature.jpg',text: "Get outside".tr(), index: 0,),
+              habit(colors: (const Color.fromRGBO(216, 245, 223, 100)), image: 'assets/images/nature.jpg',text: "Get outside".tr(), index: 0,pic: 'assets/images/trees-removebg-preview.png',)
+              ,
               SizedBox(width: 20,),
-           habit(colors: (Color.fromRGBO(255, 236, 237, 100)), image: 'assets/images/yogapn.png',text: "Morning exercies".tr(),index: 1,),
+           habit(colors: (Color.fromRGBO(255, 236, 237, 100)), image: 'assets/images/yogapn.png',text: "Morning exercies".tr(),index: 1,pic:"assets/images/sport2pn-removebg-preview.png"),
                     
   
   
@@ -57,9 +60,9 @@ return Scaffold(
   
           Row(
             children: [
-                                habit(colors: (Color.fromRGBO(251, 214, 198, 100)), image: 'assets/images/photo1659102598.jpeg',text: "Dont smoke".tr(),index: 2,),
+                                habit(colors: (Color.fromRGBO(251, 214, 198, 100)), image: 'assets/images/photo1659102598.jpeg',text: "Dont smoke".tr(),index: 2,pic: "assets/images/smokin-removebg-preview.png",),
                                  SizedBox(width: 20,),
-                                  habit(colors: (Color.fromRGBO(221, 243, 253, 100)), image: 'assets/images/drinkwaterpn.png',text: "Drink water".tr(),index: 3,),
+                                  habit(colors: (Color.fromRGBO(221, 243, 253, 100)), image: 'assets/images/drinkwaterpn.png',text: "Drink water".tr(),index: 3,pic:"assets/images/drink-removebg-preview.png"),
   
   
             ],
@@ -67,9 +70,9 @@ return Scaffold(
              SizedBox(height: 15,),
             Row(
             children: [
-                                habit(colors: (Color.fromARGB(255, 240, 196, 179)), image: 'assets/images/reading.png',text: "Read book".tr(),index: 4,),
+                                habit(colors: (Color.fromARGB(255, 240, 196, 179)), image: 'assets/images/reading.png',text: "Read book".tr(),index: 4,pic:"assets/images/bookpgpn-removebg-preview.png"),
                                  SizedBox(width: 20,),
-                                  habit(colors: (Color.fromARGB(156, 231, 231, 208)), image: 'assets/images/skincare2.jpg',text: "Skin care".tr(),index: 5,),
+                                  habit(colors: (Color.fromARGB(156, 231, 231, 208)), image: 'assets/images/skincare2.jpg',text: "Skin care".tr(),index: 5,pic: "assets/images/care1-removebg-preview.png",),
   
   
             ],
@@ -77,9 +80,9 @@ return Scaffold(
            SizedBox(height: 15,),
             Row(
             children: [
-                                habit(colors: (Color.fromARGB(119, 205, 201, 243)), image: 'assets/images/learninglang.jpg',text: "Learn language ".tr(),index: 6,),
+                                habit(colors: (Color.fromARGB(119, 205, 201, 243)), image: 'assets/images/learninglang.jpg',text: "Learn language ".tr(),index: 6,pic: "assets/images/learnlanpn-removebg-preview.png"),
                                  SizedBox(width: 20,),
-                                  habit(colors: (Color.fromRGBO(207, 164, 181, 100)), image: 'assets/images/cleaning.jpg',text: "Clean the house".tr(),index: 7,),
+                                  habit(colors: (Color.fromRGBO(207, 164, 181, 100)), image: 'assets/images/cleaning.jpg',text: "Clean the house".tr(),index: 7,pic:"assets/images/cleanpn.png"),
   
   
             ],

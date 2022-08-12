@@ -10,15 +10,13 @@ import '../Provider/db_provider.dart';
 
 
 class PageTask extends StatelessWidget{
- String title="";
- String description ="";
+ 
   
   TaskModel taskModel;
   PageTask(this.taskModel);
   @override
   Widget build(BuildContext context) {
-      return Consumer<DbProvider>(
-      builder: (context,provider,x) {
+     
          return  Padding(
      padding: EdgeInsets.only(top: 10,left: 10,right: 10,bottom: 20),
       child: Container(
@@ -39,21 +37,23 @@ class PageTask extends StatelessWidget{
           
           splashRadius: 30,
             onChanged: ( value) {
+               Provider.of<DbProvider>(context,listen: false).updateTask(taskModel);
+              
             }
         ),
       ),
    Column(
       children: [
    Row(children: [
-       Text( taskModel.title!,style: GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold,fontSize: 16),)
+       Text( taskModel.title,style: GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold,fontSize: 16),)
        ,
        ],)  ,
         SizedBox(height: 2,),
-        Row(children: [ Text(taskModel.description!,style: GoogleFonts.sourceSansPro(color: Color.fromARGB(255, 111, 110, 110),),),],)  
+        Row(children: [ Text(taskModel.description,style: GoogleFonts.sourceSansPro(color: Color.fromARGB(255, 111, 110, 110),),),],)  
       ],
    ),Spacer(),
    IconButton(onPressed: (){
-    provider.deleteTask(taskModel);
+    Provider.of<DbProvider>(context,listen: false).deleteTask(taskModel);
    }, icon: Icon(Icons.delete,color: Colors.grey,))
 
 
@@ -73,27 +73,11 @@ class PageTask extends StatelessWidget{
           ),
     );
         
-        // return Container(
-        //   margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //   child: CheckboxListTile(
-        //     secondary: IconButton(onPressed: () {
-        //       provider
-        //               .deleteTask(taskModel);
-           
-        //     }, icon: Icon(Icons.delete)),
-        //     value: taskModel.isComplete,
-        //     onChanged: (v) {
-        //       provider.updateTask(taskModel);
-        //     },
-        //     title: Text(taskModel.title!),
-        //   ),
-        // );
-      }
-    );
-
-    // TODO: implement build
-  /* */
+      
+       
      
+    
+
 
    
   }

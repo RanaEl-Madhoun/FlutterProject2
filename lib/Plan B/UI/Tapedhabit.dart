@@ -3,19 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/Plan%20B/Data/Habitmodel.dart';
 import 'package:to_do/Plan%20B/UI/HomeHabit.dart';
 
 class Tapedhabit extends StatelessWidget{
   
-  HomeHabit homeHabit;
-  Tapedhabit(this.homeHabit);
+  HabitModel _habitModel;
+  Tapedhabit(this._habitModel);
  String _starttime=DateFormat('MMM d,yyy').format(DateTime.now()).toString();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
      //backgroundColor: Colors.blueGrey,
-  backgroundColor:   homeHabit.concolor,
+  backgroundColor:  _habitModel.color,
      body: Padding(
       padding: EdgeInsets.only(top: 50,left: 30,right: 20,bottom: 20),
        child: Column(
@@ -33,7 +35,7 @@ class Tapedhabit extends StatelessWidget{
           ],
           ),
           Center(
-            child: Image.asset(homeHabit.image,width: 500,height: 300,)
+            child: Image.asset(_habitModel.image,width: 500,height: 300,)
           ),
           Expanded(
             child: Padding(
@@ -105,15 +107,37 @@ class Tapedhabit extends StatelessWidget{
         new CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 7.0,
-                  percent:homeHabit.fill,
-                  center: new Text(homeHabit.Percent),
-                  progressColor: homeHabit.Precentcolor,
+                  percent:0,
+                  center: new Text("0%"),
+                  progressColor:Colors.pink[100],
                 ),
 
-                          ],
-                        )
 
+
+                          ],
+                        ),
+  SizedBox(height: 90,),
+  ElevatedButton(onPressed: (){
+    Provider.of<HabitModel>(context,listen: false).isComplete;
+  }, child:Padding(
+        padding:EdgeInsets.only(
+          top: 10,
+          bottom: 10,
+          left: 20,
+          right: 20
+        ),
+        child:Text("Complete Task",style:GoogleFonts.taviraj(color: Colors.white,
+           fontSize: 18)),
+      ),style: ButtonStyle(
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(22.0),
+      side: BorderSide(color: Color.fromARGB(255, 56, 120, 143))
+    )
+  )
+))
                       ],
+                    
                     )
              
                     

@@ -1,18 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:to_do/Plan%20B/Data/DbHelper.dart';
 
+import 'Provider/HabitProvider.dart';
 import 'Provider/db_provider.dart';
-import 'UI/Addhabit1.dart';
+import 'UI/Createhabit.dart';
 import 'UI/Page1.dart';
 import 'UI/upcoming.dart';
 
 void main() async {
-  Intl.defaultLocale = 'en_US' ;
+    
   WidgetsFlutterBinding.ensureInitialized();
+   Intl.defaultLocale = 'en_US' ;
   await DbHelper.dbHelper. initDatabase();
 
  
@@ -26,28 +29,30 @@ void main() async {
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/langs', // <-- change the path of the translation files 
       fallbackLocale: Locale('en'),
-      child: ChangeNotifierProvider<DbProvider>(create: (context) {
-        return DbProvider();
+      // child: ChangeNotifierProvider<DbProvider>(create: (context) {
+      //   return DbProvider();
         
-      },child: MaterialApp(home: Page1()),)
+      // },child: MaterialApp(home: Page1()),)
 
-      ,
-    //   child: MultiProvider(
-    //     child: MaterialApp(home:Page1()),
-    //      providers: [
-    //       ChangeNotifierProvider<DbProvider>(
-    //   create: (context) {
-    //     return DbProvider();
-    //   },),
       
-    //     ],
+      child: MultiProvider(
+        child: MaterialApp(home:Page1()),
+         providers: [
+          ChangeNotifierProvider<DbProvider>(
+      create: (context) {
+        return DbProvider();
+      },),
+      ChangeNotifierProvider<HabitProvider>(create: (context){
+        return HabitProvider();
+      })
+      
+        ],
      
       
    
-    // ),
+    ),
       
-      // child:MaterialApp(
-      //   home:Page1())
+     
       
    ) );
 }

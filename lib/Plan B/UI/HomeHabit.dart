@@ -2,27 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:to_do/Plan%20B/Data/Habitmodel.dart';
 
 
 import 'Tapedhabit.dart';
 
 class HomeHabit extends StatelessWidget{
-  Color concolor;
-  String image;
-  String title;
-  String Percent;
-  Color Precentcolor;
-  double fill;
+  // Color concolor;
+  // String image;
+  // String title;
+  // String Percent="0%";
+  // Color Precentcolor=Color.fromARGB(255, 203, 99, 133);
+  // double fill=0;
+  
+HabitModel habitModel;
+  HomeHabit(
+    this.habitModel
 
-  HomeHabit({
-    required this.concolor,
-    required this.image,
-   required this.title,
- required this.Percent,
- required this.Precentcolor,
- required this.fill
-
-  });
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class HomeHabit extends StatelessWidget{
                     onTap: () {
                       
                     Navigator.push(context, MaterialPageRoute(builder: (context){
-                      return Tapedhabit(this);
+                      return Tapedhabit(habitModel);
                     })
                     ) ;
                     
@@ -43,7 +40,7 @@ class HomeHabit extends StatelessWidget{
                     child: Stack(children: [
                   
                       Align(alignment: Alignment(1.1,0),
-                        child: Image(image: AssetImage(image)
+                        child: Image(image: AssetImage(habitModel.image)
                         )
                         ),
                         
@@ -53,27 +50,27 @@ class HomeHabit extends StatelessWidget{
                                            radius: 40.0,
                                            lineWidth: 8.0,
                                            percent: .7,
-                                           center: new Text(Percent),
-                                           progressColor: Precentcolor,
+                                           center: new Text("0%"),
+                                           progressColor: Colors.grey,
                                          ),
                          ),
                         Align(
                           alignment: Alignment(-.8,.5),
                   
-                          child: Text(title,
+                          child: Text(habitModel.text,
                           style: TextStyle(color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 16),),
                   
                         ),
-                        Align(
-                          alignment: Alignment(-.8,.75),
-                          child: Text('06:00 am - 06:00 pm',
-                          style: TextStyle(color: Colors.white,
-                          fontWeight: FontWeight.w300
-                          ,fontSize: 11),),
+                        // Align(
+                        //   alignment: Alignment(-.8,.75),
+                        //   child: Text('06:00 am - 06:00 pm',
+                        //   style: TextStyle(color: Colors.white,
+                        //   fontWeight: FontWeight.w300
+                        //   ,fontSize: 11),),
                   
-                        ),
+                        // ),
                         SizedBox(height: 20,)
                   
                     ]),
@@ -83,7 +80,7 @@ class HomeHabit extends StatelessWidget{
                  //  borderRadius: BorderRadius.circular(12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: concolor
+                    color: habitModel.color
                     ),
                  
                  

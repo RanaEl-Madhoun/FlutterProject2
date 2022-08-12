@@ -6,13 +6,17 @@ class input_field extends StatelessWidget{
   final String hint;
   final TextEditingController?controller;
   final Widget? widget;
+  final Function ?valdite;
 
   const input_field({Key?key,
   required this.title,
   required this.hint,
    required this.controller,
-  this.widget
+  this.widget,
+  this.valdite,
+  //this.navkey
   }):super(key: key);
+ 
   
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,8 @@ class input_field extends StatelessWidget{
             ),
             child: Row(children: [
               Expanded(child: TextFormField(
+                validator: (x) => valdite!(x),
+               // key: navkey,
                 readOnly: widget==null?false:true,
                 autofocus: false,
                 controller: controller,
